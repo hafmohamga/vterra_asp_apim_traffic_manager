@@ -36,7 +36,7 @@ pipeline {
         stage('Terraform ') {
             steps {
                 script {
-                    dir('Terraform') {
+                    dir(.) {
                     sh 'terraform init -upgrade'
                     sh "terraform ${params.ACTION} --auto-approve -var 'environment=${params.ENVIRONMENT}'"
                     }
