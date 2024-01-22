@@ -24,11 +24,18 @@ resource "azurerm_app_service" "webapp" {
     dotnet_framework_version = "v6.0"
   }
 
-  source_control {
-    repo_url           = var.repo_url
-    branch             = var.branch
-    manual_integration = true
-    use_mercurial      = false
-  }
+  # source_control {
+  #   repo_url           = var.repo_url
+  #   branch             = var.branch
+  #   manual_integration = true
+  #   use_mercurial      = false
+  # }
 }
 
+resource "azurerm_app_service_source_control" "example" {
+  app_id   = azurerm_app_service.webapp.id
+  repo_url = var.repo_url
+  branch   = var.branch # "master"
+  use_manual_integration = true
+  use_mercurial      = false
+}
